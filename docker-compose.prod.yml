@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  apache:
+    restart: always
+    image: httpd:2.4
+    volumes:
+      - ./app:/usr/local/apache2/htdocs/
+    ports:
+      - 8087:80
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ROUTERNAME.rule=Host(`dns.tld`)"
+      - "traefik.http.routers.ROUTERNAME.entrypoints=websecure"
+networks:
+  web:
+    external: true

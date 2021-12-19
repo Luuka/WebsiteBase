@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  apache:
+    restart: always
+    image: httpd:2.4
+    volumes:
+      - ./app:/usr/local/apache2/htdocs/
+    ports:
+      - 80:80
+  node:
+    build: docker/node
+    volumes:
+      - ./app:/app
